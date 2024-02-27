@@ -9,7 +9,7 @@ cache:
 build_job:
   stage: build
   script: 
-    - ./mvnw clean compile
+    - ./mvnw compile
       -Dhttps.protocols=TLSv1.2
       -Dmaven.repo.local=$CI_JOB_NAME/.m2/repository
       -Dorg.slf4J.simpleLogger.log.org.apache.maven.cli.transfer.Slf4MavenTransferListener=WARN
@@ -18,4 +18,4 @@ build_job:
       --batch-mode --errors --fail-at-end
       --show-version -DinstallAtEnd=true
       -DdeployAtEnd=true
-  image: openjdk:8-alpine
+  image: adoptopenjdk/openjdk11
