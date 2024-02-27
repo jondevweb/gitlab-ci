@@ -9,10 +9,9 @@ cache:
 build_job:
   stage: build
   script: 
-    - ./mvnw compile
+    - ./mvnw clean compile
       -Dhttps.protocols=TLSv1.2
       -Dmaven.repo.local=$CI_JOB_NAME/.m2/repository
-      -Dmaven.surefire.debug="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000 -Xnoagent -Djava.compiler=NONE"
       -Dorg.slf4J.simpleLogger.log.org.apache.maven.cli.transfer.Slf4MavenTransferListener=WARN
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
