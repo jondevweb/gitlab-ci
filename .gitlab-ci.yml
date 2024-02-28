@@ -18,4 +18,4 @@ build_job:
       --batch-mode --errors --fail-at-end
       --show-version -DinstallAtEnd=true
       -DdeployAtEnd=true
-  image: openjdk:8-alpine
+  image: eclipse-temurin:17-jdk
