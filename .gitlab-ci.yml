@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 cache: 
   paths:
@@ -19,3 +20,17 @@ build_job:
       --show-version -DinstallAtEnd=true
       -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
+
+test_job:
+  stage: test
+  script:
+    - 'mvn $MAVEN_CLI_OPTS verify'
+  except:
+    variables:
+      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+verify:jdk17:
+  extends:
+    - .verify
+
+
