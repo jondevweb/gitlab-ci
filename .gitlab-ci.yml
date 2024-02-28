@@ -5,9 +5,9 @@ stages:
 cache: 
   paths:
     - .m2/repository
+    - JAVA_HOME=C:\Program Files\Java\jdk-17
   key: "$CI_JOB_NAME"
-  before_script:
-    - export JAVA_HOME=C:\Program Files\Java\jdk-17
+    
 
 build_job:
   stage: build
