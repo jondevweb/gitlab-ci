@@ -23,7 +23,7 @@ build_job:
 
 test_job:
   stage: test
-script:
+  script:
     - mvn verify
   artifacts:
     when: always
