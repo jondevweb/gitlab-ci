@@ -25,6 +25,6 @@ test_job:
   stage: test
   script:
     - pwd
-    - mvn test
+    - ./mvnw test
 
 
