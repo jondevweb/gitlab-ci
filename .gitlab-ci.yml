@@ -29,8 +29,4 @@ test_job:
     variables:
       - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-  verify:jdk17:
-    extends:
-      - .verify
-
 
