@@ -24,10 +24,9 @@ build_job:
 
 test_job:
   stage: test
-  before_script:
-    - JAVA_HOME=C:\'Program Files'\Java\jdk-17
   script:
     - pwd
     - ./mvnw test
+  image: eclipse-temurin:17-alpine
 
 
