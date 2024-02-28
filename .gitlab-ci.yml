@@ -24,10 +24,6 @@ build_job:
 test_job:
   stage: test
   script:
-    - gradle test
-  artifacts:
-    when: always
-    reports:
-      junit: build/test-results/test/**/TEST-*.xml
+    - ./mvnw test
 
 
