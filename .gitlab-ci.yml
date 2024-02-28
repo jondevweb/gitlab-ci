@@ -24,9 +24,10 @@ build_job:
 test_job:
   stage: test
   script:
-    - 'mvn $MAVEN_CLI_OPTS verify'
-  except:
-    variables:
-      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - gradle test
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
 
 
