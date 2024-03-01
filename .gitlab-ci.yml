@@ -3,7 +3,7 @@ services:
 
 stages:
   - build
-#  - build_docker
+  - build_docker
   - test
 
 variables:
