@@ -1,5 +1,6 @@
 stages:
   - build
+  - release
   - test
 
 services:
@@ -40,6 +41,21 @@ build_job:
       --show-version -DinstallAtEnd=true
       -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
+
+release:
+    image: docker:git
+    services:
+      - docker:dind
+    variables:
+      DOCKER_DRIVER: overlay
+    stage: release
+    before_script:
+     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    script:
+      - docker build --tag=$IMAGE_TAG . --pull -t $IMAGE_NAME
+      - docker push $IMAGE_NAME
+    only:
+      - /^(feat-|master).*$/
 
 test_job:
   stage: test
