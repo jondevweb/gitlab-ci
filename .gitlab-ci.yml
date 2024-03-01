@@ -27,11 +27,13 @@ test_job:
   script:
     - pwd
     - ./mvnw test
-    - gradle test
+    - mvn verify
   artifacts:
     when: always
     reports:
-      junit: build/test-results/test/**/TEST-*.xml
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
   image: eclipse-temurin:17-alpine
 
     
