@@ -3,7 +3,7 @@ services:
 
 stages:
   - build
-  - build_docker
+#  - build_docker
   - test
 
 variables:
@@ -35,8 +35,8 @@ test_job:
     - ./mvnw test
   image: eclipse-temurin:17-alpine
 
-build_docker_job:
-  stage: build_docker
+#build_docker_job:
+#  stage: build_docker
 #  script:
 
 #before_script:
