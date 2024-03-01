@@ -5,7 +5,7 @@ stages:
 services:
  - name: docker:dind
    command: ["--tls=false"]
-   
+
 variables:
  DOCKER_HOST: "tcp://docker:2375"
  DOCKER_TLS_CERTDIR: ""
@@ -46,5 +46,5 @@ test_job:
   script:
     - pwd
     - ./mvnw test
-    - 'mvn $MAVEN_CLI_OPTS verify'
+    - './mvnw $MAVEN_CLI_OPTS verify'
   image: eclipse-temurin:17-alpine
