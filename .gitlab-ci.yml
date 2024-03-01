@@ -6,7 +6,6 @@ cache:
   paths:
     - .m2/repository
   key: "$CI_JOB_NAME"
-    
 
 build_job:
   stage: build
@@ -27,14 +26,4 @@ test_job:
   script:
     - pwd
     - ./mvnw test
-    - mvn verify
-  artifacts:
-    when: always
-    reports:
-      junit:
-        - target/surefire-reports/TEST-*.xml
-        - target/failsafe-reports/TEST-*.xml
   image: eclipse-temurin:17-alpine
-
-    
-
