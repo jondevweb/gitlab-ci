@@ -45,12 +45,12 @@ build_job:
 release_job:
   stage: release
   before_script:
-     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-      - docker build --tag=$IMAGE_TAG . --pull -t $IMAGE_NAME
-      - docker push $IMAGE_NAME
+    - docker build --tag=$IMAGE_TAG . --pull -t $IMAGE_NAME
+    - docker push $IMAGE_NAME
   only:
-      - /^(feat-|master).*$/
+    - /^(feat-|master).*$/
   image: docker:git
 
 test_job:
