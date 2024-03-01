@@ -35,7 +35,7 @@ test_job:
     - ./mvnw test
   image: eclipse-temurin:17-alpine
 
-#build_docker_job:
+build_docker_job:
 #  stage: build_docker
 #  script:
 
