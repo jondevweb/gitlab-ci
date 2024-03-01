@@ -1,6 +1,6 @@
 stages:
   - build
-  - release
+  - build_docker
   - test
 
 services:
@@ -42,8 +42,8 @@ build_job:
       -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
 
-release_job:
-  stage: release
+build_docker_job:
+  stage: build_docker
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
