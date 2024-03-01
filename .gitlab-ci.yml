@@ -3,6 +3,7 @@ services:
 
 stages:
   - build
+  - build_docker
   - test
 
 variables:
@@ -34,15 +35,9 @@ test_job:
     - ./mvnw test
   image: eclipse-temurin:17-alpine
 
-
-services:
-  - docker:dind
-
-#stages:
-#- build
-
-#variables:
-#  CONTAINER_TEST_IMAGE: my-docker-hub/$CI_PROJECT_ID:$CI_BUILD_REF_NAME_test
+build_docker_job:
+  stage: build_docker
+#  script:
 
 #before_script:
 #  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN my-docker-hub
