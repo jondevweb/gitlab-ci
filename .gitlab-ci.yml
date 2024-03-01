@@ -43,20 +43,15 @@ build_job:
   image: eclipse-temurin:17-alpine
 
 release_job:
-    stage: release
-    image: docker:git
-    services:
-      - docker:dind
-    variables:
-      DOCKER_DRIVER: overlay
-    stage: release
-    before_script:
+  stage: release
+  before_script:
      - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    script:
+  script:
       - docker build --tag=$IMAGE_TAG . --pull -t $IMAGE_NAME
       - docker push $IMAGE_NAME
-    only:
+  only:
       - /^(feat-|master).*$/
+  image: docker:git
 
 test_job:
   stage: test
