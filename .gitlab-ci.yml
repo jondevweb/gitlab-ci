@@ -27,6 +27,12 @@ test_job:
   script:
     - pwd
     - ./mvnw test
+    - gradle test
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
   image: eclipse-temurin:17-alpine
 
+    
 
