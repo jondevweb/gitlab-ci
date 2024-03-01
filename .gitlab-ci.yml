@@ -1,5 +1,6 @@
 stages:
   - build
+  - build_docker
   - test
 
 cache: 
@@ -19,6 +20,12 @@ build_job:
       --batch-mode --errors --fail-at-end
       --show-version -DinstallAtEnd=true
       -DdeployAtEnd=true
+  image: eclipse-temurin:17-alpine
+
+build_docker_job:
+  stage: build_docker
+  script:
+    - docker build -t java-docker-image-test --progress=plain --no-cache --target=test .
   image: eclipse-temurin:17-alpine
 
 test_job:
