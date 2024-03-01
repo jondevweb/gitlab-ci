@@ -5,11 +5,13 @@ stages:
   - build
   - test
 
+variables:
+  CONTAINER_TEST_IMAGE: my-docker-hub/$CI_PROJECT_ID:$CI_BUILD_REF_NAME_test
+
 cache: 
   paths:
     - .m2/repository
-  key: "$CI_JOB_NAME"
-    
+  key: "$CI_JOB_NAME" 
 
 build_job:
   stage: build
