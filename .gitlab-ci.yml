@@ -1,20 +1,12 @@
-services:
-  - docker:dind
-
 stages:
   - build
   - test
 
-variables:
-  CONTAINER_TEST_IMAGE: my-docker-hub/$CI_PROJECT_ID:$CI_BUILD_REF_NAME_test
-
 cache: 
   paths:
     - .m2/repository
-  key: "$CI_JOB_NAME" 
-
-before_script:
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN my-docker-hub
+  key: "$CI_JOB_NAME"
+    
 
 build_job:
   stage: build
@@ -37,6 +29,4 @@ test_job:
     - ./mvnw test
   image: eclipse-temurin:17-alpine
 
-#  script:
-#    - docker build --pull -t $CONTAINER_TEST_IMAGE .
-#    - docker push $CONTAINER_TEST_IMAGE
+
