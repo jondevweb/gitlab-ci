@@ -42,7 +42,7 @@ build_job:
       -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
 
-release:
+release_job:
     image: docker:git
     services:
       - docker:dind
