@@ -2,6 +2,21 @@ stages:
  - build
  - test 
 
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_USERNAME: $DOCKER_USERNAME 
+  DOCKER_PASSWORD: $DOCKER_PASSWORD
+  DOCKER_REGISTRY: jondevweb/dockerintegrationtest
+
+docker_build_job:
+  stage: docker_build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker build --no-cache -t $DOCKER_REGISTRY -f docker/Dockerfile.test .
+
 cache:
   paths:
     - .m2/repository
@@ -19,11 +34,19 @@ maven_build_job:
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
 
-test_build_job:
+test_job:
   stage: test
   script:
-    - ./mvnw -Dtest=Test1 test  
-
+    - ./mvnw test
+      -Dhttps.protocols=TLSv1.2
+      -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+      -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN
+      -Dorg.slf4j.simpleLogger.showDateTime=true
+      -Djava.awt.headless=true
+      --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
-#  dependencies:
-#    - maven_build_job
+  dependencies:
+    - maven_build_job
+
+test_integration:
+  stage: test

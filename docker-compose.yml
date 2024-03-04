@@ -142,3 +142,13 @@ services:
           memory: 256M
     ports:
     - 9091:9090
+
+ test_integration:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.test
+    container_name: test_integration
+    depends_on:
+      - confif_server
+      - discovery-server
+    command: mvn test
