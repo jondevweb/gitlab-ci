@@ -63,5 +63,5 @@ test_job:
       --show-version -DinstallAtEnd=true
       -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
-  dependency:
+  dependencies:
     - maven_build_job
