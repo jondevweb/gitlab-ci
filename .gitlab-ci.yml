@@ -29,6 +29,7 @@ test_build_job:
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
+      -Dtest="Test"
   image: eclipse-temurin:17-alpine
   dependencies:
     - maven_build_job
