@@ -29,7 +29,7 @@ test_build_job:
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
       -Dtest=test/java/Test
-#      -Dsurefire.failIfNoSpecifiedTests=false
+      -Dsurefire.failIfNoSpecifiedTests=false
 
   image: eclipse-temurin:17-alpine
   dependencies:
