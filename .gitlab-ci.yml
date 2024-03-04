@@ -27,7 +27,7 @@ test_build_job:
 #      -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
 #      -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN
 #      -Dorg.slf4j.simpleLogger.showDateTime=true
-#      -Djava.awt.headless=true
+      -Djava.awt.headless=true
 #      -Dsurefire.failIfNoSpecifiedTests=false
       -Dtest=test/java/Test
       
