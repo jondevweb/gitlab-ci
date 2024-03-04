@@ -16,6 +16,7 @@ docker_build_job:
   script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker build --no-cache -t $DOCKER_REGISTRY -f docker/Dockerfile.test .
+    - docker push $DOCKER_REGISTRY
 
 cache:
   paths:
