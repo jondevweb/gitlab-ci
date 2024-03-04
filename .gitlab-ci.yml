@@ -2,7 +2,7 @@ stages:
   - build
   - build_docker
   - test
-  - test_2
+  - test_build
 
 services:
  - name: docker:dind
@@ -62,8 +62,8 @@ test_job:
     - './mvnw $MAVEN_CLI_OPTS verify'
   image: eclipse-temurin:17-alpine
 
-test_2_job:
-  stage: test_2
+test_build_job:
+  stage: test_build
   script: 
     - ./mvnw test
       -Dhttps.protocols=TLSv1.2
