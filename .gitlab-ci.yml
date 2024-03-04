@@ -30,8 +30,6 @@ test_build_job:
       -Djava.awt.headless=true
 #      -Dsurefire.failIfNoSpecifiedTests=false
       -Dtest=test/java/Test
-      
-
   image: eclipse-temurin:17-alpine
-  dependencies:
-    - maven_build_job
+#  dependencies:
+#    - maven_build_job
