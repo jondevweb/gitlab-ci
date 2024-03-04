@@ -169,7 +169,7 @@
                                 </execution>
                             </executions>
                         </plugin>
-<!--                       <plugin>
+                        <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-plugin</artifactId>
                             <version>:3.2.5</version>
@@ -178,7 +178,7 @@
                                     <include>test/java/Test.java</include>
                                 </includes>
                             </configuration>
-                        </plugin>--> 
+                        </plugin>
                     </plugins>
                 </pluginManagement>
             </build>
