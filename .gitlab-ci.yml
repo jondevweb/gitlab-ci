@@ -22,8 +22,7 @@ maven_build_job:
 test_build_job:
   stage: test
   script:
-    - ./mvnw test
-      -Dmaven.test.skip=true package   
+    - ./mvnw -Dtest=Test1 test  
   image: eclipse-temurin:17-alpine
 #  dependencies:
 #    - maven_build_job
