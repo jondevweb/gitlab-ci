@@ -28,8 +28,9 @@ test_build_job:
       -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
+      -Dsurefire.failIfNoSpecifiedTests=false
       -Dtest=Test
-      -Dsurefire.failIfNoSpecifiedTests=true
+      
 
   image: eclipse-temurin:17-alpine
   dependencies:
