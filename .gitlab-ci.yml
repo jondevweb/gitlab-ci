@@ -1,67 +1,34 @@
 stages:
-  - build
-  - test
+ - build
+ - test 
 
-services:
- - name: docker:dind
-   command: ["--tls=false"]
-
-variables:
- DOCKER_HOST: "tcp://docker:2375"
- DOCKER_TLS_CERTDIR: ""
- DOCKER_DRIVER: overlay2
- MAVEN_OPTS: >-
-   -Dhttps.protocols=TLSv1.2
-   -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
-   -Dorg.slf4j.simpleLogger.showDateTime=true
-   -Djava.awt.headless=true
- MAVEN_CLI_OPTS: >-
-   --batch-mode
-   --errors
-   --fail-at-end
-   --show-version
-   --no-transfer-progress
-
-cache: 
+cache:
   paths:
     - .m2/repository
   key: "$CI_JOB_NAME"
 
-build_job:
+maven_build_job:
   stage: build
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  script: 
+  script:
     - ./mvnw clean compile
       -Dhttps.protocols=TLSv1.2
-      -Dmaven.repo.local=$CI_JOB_NAME/.m2/repository
-      -Dorg.slf4J.simpleLogger.log.org.apache.maven.cli.transfer.Slf4MavenTransferListener=WARN
+      -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+      -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
-      --batch-mode --errors --fail-at-end
-      --show-version -DinstallAtEnd=true
-      -DdeployAtEnd=true
-    - docker build --tag=$IMAGE_TAG . --pull -t $IMAGE_NAME
-    - docker push $IMAGE_NAME
-  only:
-    - /^(feat-|master).*$/
+      --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
-  image: docker:git
 
-test_job:
+test_build_job:
   stage: test
   script:
-    - pwd
     - ./mvnw test
-    - './mvnw $MAVEN_CLI_OPTS verify'
       -Dhttps.protocols=TLSv1.2
-      -Dmaven.repo.local=$CI_JOB_NAME/.m2/repository
-      -Dorg.slf4J.simpleLogger.log.org.apache.maven.cli.transfer.Slf4MavenTransferListener=WARN
+      -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+      -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
-      --batch-mode --errors --fail-at-end
-      --show-version -DinstallAtEnd=true
-      -DdeployAtEnd=true
+      --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
   dependencies:
     - maven_build_job
