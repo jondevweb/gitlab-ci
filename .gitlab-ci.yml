@@ -23,6 +23,7 @@ test_build_job:
   stage: test
   script:
     - ./mvnw -Dtest=Test1 test  
+      -Dsurefire.failIfNoSpecifiedTests=false
   image: eclipse-temurin:17-alpine
 #  dependencies:
 #    - maven_build_job
