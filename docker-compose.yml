@@ -141,3 +141,13 @@ services:
       - config-server 
       - discovery-server 
     command: mvn test
+
+  test_admin:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.admin
+    container_name: test_admin
+    depends_on: 
+      - config-server 
+      - discovery-server 
+    command: mvn test
