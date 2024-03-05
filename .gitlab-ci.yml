@@ -1,6 +1,6 @@
 stages:
- - docker_build
  - build
+ - docker_build
  - test 
 
 variables:
