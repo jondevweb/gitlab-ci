@@ -5,8 +5,8 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay2
-  DOCKER_USERNAME: $DOCKER_USERNAME 
-  DOCKER_PASSWORD: $DOCKER_PASSWORD
+  DOCKER_USERNAME: "jondevweb" 
+  DOCKER_PASSWORD: "Nosferatus66"
   DOCKER_REGISTRY: jondevweb/dockerintegrationtest
 
 docker_build_job:
@@ -15,7 +15,7 @@ docker_build_job:
   services:
     - docker:dind
   script:
-    - echo "$DOCKER_USERNAME" | docker login -u "$DOCKER_PASSWORD" --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker build --no-cache -t $DOCKER_REGISTRY -f docker/Dockerfile.test .
     - docker push $DOCKER_REGISTRY
 
