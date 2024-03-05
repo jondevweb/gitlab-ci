@@ -149,6 +149,6 @@ services:
       dockerfile: docker/Dockerfile.test
     container_name: test_integration
     depends_on:
-      - confif_server
+      - config_server
       - discovery-server
     command: mvn test
