@@ -1,6 +1,6 @@
 stages:
- - build
  - docker_build
+ - build_maven
  - test 
 
 variables:
@@ -25,16 +25,26 @@ cache:
   key: "$CI_JOB_NAME"
 
 maven_build_job:
-  stage: build
+  stage: build_maven
+  image: $DOCKER_REGISTRY
+  variables: 
+    DOCKER_HOST: tcp://docker:2375
+  before_script:
+    - apt-get update && apt-get install -y docker-compose
   script:
-    - ./mvnw clean compile
+    - docker-compose up -d --build
+    - ./mvnw clean package -DskipTests=true
       -Dhttps.protocols=TLSv1.2
       -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
       -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
-  image: eclipse-temurin:17-alpine
+  dependencies:
+   - docker_build_job
+  artifacts:
+    paths:
+      - spring-petclinic-admin-server/target/*.jar
 
 test_build_job:
   stage: test
