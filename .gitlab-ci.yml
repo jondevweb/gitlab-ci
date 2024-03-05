@@ -67,3 +67,5 @@ test_integration:
     - docker:dind
   script:
     - docker-compose up --build test_integration .
+  dependencies:
+    - maven_build_job
