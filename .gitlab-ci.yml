@@ -67,6 +67,8 @@ test_integration:
   image: $DOCKER_REGISTRY
   services:
     - docker:dind
+  before_script:
+    - apt-get update && apt-get install -y docker-compose
   script:
     - docker-compose up --build test_integration .
   dependencies:
