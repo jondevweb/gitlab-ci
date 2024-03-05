@@ -15,7 +15,7 @@ docker_build_job:
   services:
     - docker:dind
   script:
-    - echo "Nosferatus66" | docker login -u "jondevweb" --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker build --no-cache -t $DOCKER_REGISTRY -f docker/Dockerfile.test .
     - docker push $DOCKER_REGISTRY
 
@@ -34,7 +34,7 @@ maven_build_job:
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
-  image: eclipse-temurin:17-alpine
+  image: eclipse-temurin:17-jdk
 
 test_build_job:
   stage: test
@@ -46,7 +46,7 @@ test_build_job:
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
-  image: eclipse-temurin:17-alpine
+  image: eclipse-temurin:17-jdk
   dependencies:
     - maven_build_job
 
