@@ -31,6 +31,8 @@ services:
     depends_on:
       config-server:
         condition: service_healthy
+    config-server:
+     image: config-server
     ports:
      - 8761:8761
 
@@ -46,6 +48,10 @@ services:
         condition: service_healthy
       discovery-server:
         condition: service_healthy
+    config-server:
+     image: config-server
+    discovery-server:
+     image: config-server
     ports:
     - 8081:8081
 
@@ -61,6 +67,10 @@ services:
         condition: service_healthy
       discovery-server:
         condition: service_healthy
+    config-server:
+     image: config-server
+    discovery-server:
+     image: config-server
     ports:
      - 8082:8082
 
@@ -76,6 +86,10 @@ services:
         condition: service_healthy
       discovery-server:
         condition: service_healthy
+    config-server:
+     image: config-server
+    discovery-server:
+     image: config-server
     ports:
      - 8083:8083
 
@@ -91,6 +105,10 @@ services:
         condition: service_healthy
       discovery-server:
         condition: service_healthy
+    config-server:
+     image: config-server
+    discovery-server:
+     image: config-server
     ports:
      - 8080:8080
 
@@ -118,6 +136,10 @@ services:
         condition: service_healthy
       discovery-server:
         condition: service_healthy
+    config-server:
+     image: config-server
+    discovery-server:
+     image: config-server
     ports:
      - 9090:9090
 
@@ -148,9 +170,13 @@ services:
       context: .
       dockerfile: docker/Dockerfile.test
     container_name: test_integration
-    depends_on:
-      config-server:
-        condition: service_healthy
-      discovery-server:
-        condition: service_healthy
+    depends_on: 
+      config-server: 
+        condition: service_healthy 
+      discovery-server: 
+        condition: service_healthy 
+    config-server:
+     image: config-server
+    discovery-server:
+     image: config-server
     command: mvn test
