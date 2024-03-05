@@ -5,8 +5,8 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay2
-  DOCKER_USERNAME: "jondevweb" 
-  DOCKER_PASSWORD: "Nosferatus66"
+  DOCKER_USERNAME: $DOCKER_USERNAME 
+  DOCKER_PASSWORD: $DOCKER_PASSWORD
   DOCKER_REGISTRY: jondevweb/dockerintegrationtest
 
 docker_build_job:
@@ -36,7 +36,7 @@ maven_build_job:
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
   image: eclipse-temurin:17-alpine
 
-test_job:
+test_build_job:
   stage: test
   script:
     - ./mvnw test
