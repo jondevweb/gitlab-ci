@@ -11,3 +11,9 @@ RUN apt-get update -qq && \
   apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io && \
   apt-get clean
 
+# definir le repertoire de travail deans le conteneur
+WORKDIR ./application
+# copier le fichier pom.xml 
+COPY . .
+# Construire application avec maven
+RUN mvn clean install
