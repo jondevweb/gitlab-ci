@@ -5,8 +5,8 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay2
-  DOCKER_USERNAME: $DOCKER_USERNAME 
-  DOCKER_PASSWORD: $DOCKER_PASSWORD
+  DOCKER_USERNAME: "jondevweb" 
+  DOCKER_PASSWORD: "Nosferatus66!"
   DOCKER_REGISTRY: jondevweb/dockerintegrationtest
 
 docker_build_job:
