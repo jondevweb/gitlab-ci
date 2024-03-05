@@ -1,5 +1,5 @@
 #Utilise une image de base maven et openjdk17
-FROM maven 3.8.4-openjdk-17-slim as builder
+FROM maven:3.8.4-openjdk-17-slim as builder
 
 #installer docker afin que le conteneur puisse construire des images docker
 USER root
