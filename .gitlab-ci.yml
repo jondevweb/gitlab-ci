@@ -29,6 +29,8 @@ maven_build_job:
   image: $DOCKER_REGISTRY
   variables: 
     DOCKER_HOST: tcp://docker:2375/
+  services:
+    - docker:dind
   before_script:
     - apt-get update && apt-get install -y docker-compose
   script:
