@@ -89,3 +89,17 @@ test_admin:
     - docker-compose up --build test_admin
   dependencies:
     - maven_build_job
+
+test_customer:
+  stage: test
+  image: $DOCKER_REGISTRY
+  variables: 
+    DOCKER_HOST: tcp://docker:2375
+  services:
+    - docker:dind
+  before_script:
+    - apt-get update && apt-get install -y docker-compose
+  script:
+    - docker-compose up --build test_customer
+  dependencies:
+    - maven_build_job

@@ -151,3 +151,13 @@ services:
       - config-server 
       - discovery-server 
     command: mvn test
+
+  test_customer:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.customer
+    container_name: test_customer
+    depends_on: 
+      - config-server 
+      - discovery-server 
+    command: mvn test
