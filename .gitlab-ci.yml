@@ -8,7 +8,6 @@ variables:
   DOCKER_USERNAME: $DOCKER_USERNAME 
   DOCKER_PASSWORD: $DOCKER_PASSWORD
   DOCKER_REGISTRY: jondevweb/dockerintegrationtest
-  DOCKER_REGISTRY_: jondevweb/dockerintegrationtest
 
 docker_build_job:
   stage: docker_build
@@ -18,8 +17,6 @@ docker_build_job:
   script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker build --no-cache -t $DOCKER_REGISTRY -f docker/Dockerfile.test .
-    - docker push $DOCKER_REGISTRY
-    - docker build --no-cache -t $DOCKER_REGISTRY -f docker/Dockerfile.admin .
     - docker push $DOCKER_REGISTRY
 
 cache:

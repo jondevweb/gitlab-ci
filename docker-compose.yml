@@ -135,7 +135,7 @@ services:
   test_integration:
     build:
       context: .
-      dockerfile: docker/Dockerfile.test
+      dockerfile: ./docker/Dockerfile.test
     container_name: test_integration
     depends_on: 
       - config-server 
@@ -145,7 +145,7 @@ services:
   test_admin:
     build:
       context: .
-      dockerfile: docker/Dockerfile.admin
+      dockerfile: ./docker/Dockerfile.admin
     container_name: test_admin
     depends_on: 
       - config-server 
