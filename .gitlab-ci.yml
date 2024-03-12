@@ -115,7 +115,7 @@ package_job:
   dependencies:
     - maven_build_job
   before_script:
-    - 'echo "Listing current directory contents"
+    - 'echo "Listing current directory contents"'
     - 'ls -lah'
   script:
     - 'echo "Building project with Maven"'
