@@ -107,7 +107,7 @@ test_customer:
 
 package_job:
   stage: package
-  image: maven:latest
+  image: $DOCKER_REGISTRY
   services:
     - docker:dind
   dependencies:
