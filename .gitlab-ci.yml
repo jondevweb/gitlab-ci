@@ -108,6 +108,8 @@ test_customer:
 package_job:
   stage: package
   image: $DOCKER_REGISTRY
+  variables: 
+    DOCKER_HOST: tcp://docker:2375
   services:
     - docker:dind
   dependencies:
